@@ -2,7 +2,9 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 from pandas import *
+
 import altair as alt
+
 
 
 st.set_page_config(page_title="Retail", page_icon=":bar_chart:", layout="wide",initial_sidebar_state= "expanded")
@@ -76,7 +78,7 @@ fig = px.line(Storage_Cost_By_Month,x = 'Month',y='Unit Storage Cost',
 title="<b>Comparison Of AVG Unit Storage Cost By Sub-Department</b>"
 )
 
-st.plotly_chart(fig)
+st.plotly_chart(fig,use_container_width=True)
 
 #CHART-2
 Storage_Cost_By_Month= df_selection.groupby(by=["SubDepartment"]).mean()[["Unit Storage Cost"]]
@@ -92,7 +94,7 @@ plot_bgcolor="rgba(0,0,0,0)",
 yaxis=(dict(showgrid=False)),
 )
 
-st.plotly_chart(SubDepartment_unit_Storge_Cost)
+st.plotly_chart(SubDepartment_unit_Storge_Cost,use_container_width=True)
 
 
 #CHART-3
@@ -149,52 +151,8 @@ plot_bgcolor="rgba(0,0,0,0)",
 yaxis=(dict(showgrid=False)),
 )
 
-st.plotly_chart(SubDepartment_unit_Storge_Cost)
+st.plotly_chart(SubDepartment_unit_Storge_Cost,use_container_width=True)
 
-
-# #CHART-4
-# Storage_Cost_By_Month= df_selection.groupby(by=["SubDepartment"]).mean()[["Days Of Supply"]].reset_index()
-# SubDepartment_unit_Storge_Cost = px.bar(
-#     Storage_Cost_By_Month,
-#     x= Storage_Cost_By_Month.index,
-#     y="SubDepartment",
-#     title="<b>Comparison Of Unit Storage Cost By Month</b>",
-#     color=["#FFFFFF"] * len( Storage_Cost_By_Month),
-#     template="plotly_white"
-    
-# )
-# SubDepartment_unit_Storge_Cost.update_layout(
-# xaxis=dict(tickmode="linear"),
-# plot_bgcolor="rgba(0,0,0,0)",
-# yaxis=(dict(showgrid=False)),
-# )
-
-# st.plotly_chart(SubDepartment_unit_Storge_Cost)
-
-# #CHART-6
-# Storage_Cost_By_Month= df_selection.groupby(by=["Department"]).mean()[["Unit Storage Cost"]]
-# SubDepartment_unit_Storge_Cost = px.bar(
-#     Storage_Cost_By_Month,
-#     x= Storage_Cost_By_Month.index,
-#     y="Unit Storage Cost",
-#     title="<b>Comparison Of Unit Storage Cost By Month</b>",
-#     color=["#FFFFFF"] * len( Storage_Cost_By_Month),
-#     template="plotly_white"
-    
-# )
-# SubDepartment_unit_Storge_Cost.update_layout(
-# xaxis=dict(tickmode="linear"),
-# plot_bgcolor="rgba(0,0,0,0)",
-# yaxis=(dict(showgrid=False)),
-# )
-
-# st.plotly_chart(SubDepartment_unit_Storge_Cost)
-
-
-# st.plotly_chart(SubDepartment_unit_Storge_Cost)
-
-# with open('style.css') as f:
-#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 st.title("Orders to be placed and it's cost for placing order")
 # # TOP KPI's
@@ -260,6 +218,28 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
