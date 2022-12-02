@@ -2,9 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 from pandas import *
-#import matplotlib.pyplot as plt
 import altair as alt
-import plost
 
 
 st.set_page_config(page_title="Retail", page_icon=":bar_chart:", layout="wide",initial_sidebar_state= "expanded")
