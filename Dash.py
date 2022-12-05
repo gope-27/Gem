@@ -78,7 +78,7 @@ with right_column:
 st.markdown("""---""")
 
 # #CHART_1
-Storage_Cost_By_Month= df.groupby(by=["Month"]).mean()[["Unit Storage Cost"]].round(2).reset_index()
+Storage_Cost_By_Month= df_selection.groupby(by=["Month"]).mean()[["Unit Storage Cost"]].round(2).reset_index()
 fig = px.line(Storage_Cost_By_Month,x = 'Month',y='Unit Storage Cost',text=(Storage_Cost_By_Month['Unit Storage Cost']),
 title="<b>Comparison Of Unit Storage Cost By Month</b>"
 )
