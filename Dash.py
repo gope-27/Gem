@@ -53,21 +53,27 @@ st.markdown("##")
 
 
 # TOP KPI's
-Previous_year_Overall_Average_Unit_Storage_Cost = (df_selection["Unit Storage Cost"].mean())
+Overall_Average_Unit_Storage_Cost = (df_selection["Unit Storage Cost"].mean())
 Orders_for_next_3days = df_selection[(df_selection['Next Order Flag'] >= 0) & (df_selection['Next Order Flag'] <= 3)].count()["Next Reorder date (in days)"]
 Cost_for_next_3days = df_selection[(df_selection['Next Order Flag'] >= 0) & (df_selection['Next Order Flag'] <= 3)].sum()["Unit cost"]
 left_column, middle_column, right_column = st.columns(3)
-with left_column:
-    st.subheader("Previous year Overall AVG Unit Storage Cost")
-    st.subheader(f" $ {Previous_year_Overall_Average_Unit_Storage_Cost}")
+
+with left_column:   
+    # st.markdown("Previous year Overall AVG Unit Storage Cost")
+    # st.markdown(f" $ {Previous_year_Overall_Average_Unit_Storage_Cost}")
+    st.markdown("<h4 style='text-align: center; color: black;'> Overall AVG Unit Storage Cost</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str((float("{:.2f}".format(Overall_Average_Unit_Storage_Cost ))))+"</h4>", unsafe_allow_html=True)  
+
 
 with middle_column:
-    st.subheader("Orders for next 3days ")
-    st.subheader(f"{Orders_for_next_3days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Order For Next 3days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+str(round(Orders_for_next_3days))+"</h4>", unsafe_allow_html=True)  
+
 
 with right_column:
-    st.subheader("Cost for next 3days ")
-    st.subheader(f"{Cost_for_next_3days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Cost For Next 3days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(Cost_for_next_3days  /1000,2))+"K"+"</h4>", unsafe_allow_html=True)  
+
 
 
 st.markdown("""---""")
@@ -161,54 +167,56 @@ Orders_for_next_5days = df_selection[(df_selection['Next Order Flag'] <=5 ) & (d
 Orders_for_next_7days = df_selection[(df_selection['Next Order Flag'] <=7 ) & (df_selection['Next Order Flag'] >= 0)].count()["Next Reorder date (in days)"]
 Orders_for_next_15days = df_selection[(df_selection['Next Order Flag'] <=15 ) & (df_selection['Next Order Flag'] >= 0)].count()["Next Reorder date (in days)"]
 left_column, middle_column, right_column = st.columns(3)
+
 with left_column:
-    st.subheader("Orders For Next 5 Days")
-    st.subheader(f"{Orders_for_next_5days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Order For Next 5days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+str(round(Orders_for_next_5days))+"</h4>", unsafe_allow_html=True)  
 
 with middle_column:
-    st.subheader("Orders For Next 7 Days")
-    st.subheader(f"{Orders_for_next_7days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Order For Next 5days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+str(round(Orders_for_next_7days ))+"</h4>", unsafe_allow_html=True)  
 
 with right_column:
-    st.subheader("Orders For Next 15 Days")
-    st.subheader(f"{Orders_for_next_15days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Order For Next 5days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+str(round(Orders_for_next_15days))+"</h4>", unsafe_allow_html=True)  
 
 cost_for_next_5days = df_selection[(df_selection['Next Order Flag'] >= 0) & (df['Next Order Flag'] <= 5)].sum()["Unit cost"]
 cost_for_next_7days = df_selection[(df_selection['Next Order Flag'] >=0 ) & (df_selection['Next Order Flag'] <=7 )].sum()["Unit cost"]
 cost_for_next_15days = df_selection[(df_selection['Next Order Flag'] >=0 ) & (df_selection['Next Order Flag'] <=15 )].sum()["Unit cost"]
 left_column, middle_column, right_column = st.columns(3)
+
 with left_column:
-    st.subheader("Cost For Next 5days")
-    st.subheader(f"{cost_for_next_5days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Cost For Next 5days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(cost_for_next_5days /1000,2))+"K"+"</h4>", unsafe_allow_html=True)  
 
 with middle_column:
-    st.subheader("Cost For Next 7days")
-    st.subheader(f"{cost_for_next_7days}")
-
+    st.markdown("<h4 style='text-align: center; color: black;'>Cost For Next 7days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(cost_for_next_7days /1000,2))+"K"+"</h4>", unsafe_allow_html=True)
+   
 with right_column:
-    st.subheader("Cost For Next 15days")
-    st.subheader(f"{cost_for_next_15days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Cost For Next 15days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(cost_for_next_15days /1000,2))+"K"+"</h4>", unsafe_allow_html=True)
+   
 
 st.title("Amount to be returned within payment terms")
 
 return_amount_within_90days = df_selection[(df_selection['Payment terms (in Days)'] <= 90) & (df_selection['Payment terms (in Days)'] >=0) & (df_selection['Next Order Flag'] <=15) & (df_selection['Next Order Flag'] >=0)].sum()["Amount for Placing order"]
 return_amount_within_60days = df_selection[(df_selection['Payment terms (in Days)'] <= 60) & (df_selection['Payment terms (in Days)'] >=0) & (df_selection['Next Order Flag'] <=15) & (df_selection['Next Order Flag'] >=0)].sum()["Amount for Placing order"]
+return_amount_within_45days = df_selection[(df_selection['Payment terms (in Days)'] <= 45) & (df_selection['Payment terms (in Days)'] >=0) & (df_selection['Next Order Flag'] <=15) & (df_selection['Next Order Flag'] >=0)].sum()["Amount for Placing order"]  
 
-left_column,right_column = st.columns(2)
+left_column,middle_column,right_column = st.columns(3)
 with left_column:
-    st.subheader("Amount to be returned within 90days")
-    st.subheader(f"{return_amount_within_90days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Amount to be returned within 90days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(return_amount_within_90days /1000000,2))+"M"+"</h4>", unsafe_allow_html=True)
+
+with middle_column:
+    st.markdown("<h4 style='text-align: center; color: black;'>Amount to be returned within 60days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(return_amount_within_60days /1000,2))+"K"+"</h4>", unsafe_allow_html=True)
 
 with right_column:
-    st.subheader("Amount to be returned within 60days")
-    st.subheader(f"{return_amount_within_60days}")
+    st.markdown("<h4 style='text-align: center; color: black;'>Amount to be returned within 45days </h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: blue;'>"+"$ "+str(round(return_amount_within_45days /1000,2))+"K"+"</h4>", unsafe_allow_html=True)
 
-return_amount_within_45days = df_selection[(df_selection['Payment terms (in Days)'] <= 45) & (df_selection['Payment terms (in Days)'] >=0) & (df_selection['Next Order Flag'] <=15) & (df_selection['Next Order Flag'] >=0)].sum()["Amount for Placing order"]
-
-st.subheader("Amount to be returned within 45days")
-st.subheader(f"{return_amount_within_45days}")
-
-# st.markdown("""---""")
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
             <style>
